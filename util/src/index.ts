@@ -2,10 +2,11 @@ import { promisify } from 'util';
 import { writeFile, existsSync } from 'fs';
 import { join, parse, resolve, dirname } from 'path';
 import { copy } from 'fs-extra';
-import * as chalk from 'chalk';
 
 // @ts-ignore
 import config from '../../../../capacitor.config.json';
+
+const chalk = require('chalk');
 
 interface CliConfigFirebase {
   apiKey: string;

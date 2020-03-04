@@ -1,11 +1,4 @@
 "use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -14,9 +7,9 @@ const util_1 = require("util");
 const fs_1 = require("fs");
 const path_1 = require("path");
 const fs_extra_1 = require("fs-extra");
-const chalk = __importStar(require("chalk"));
 // @ts-ignore
 const capacitor_config_json_1 = __importDefault(require("../../../../capacitor.config.json"));
+const chalk = require('chalk');
 const FIREBASECONFIGKEYS = ['apiKey', 'authDomain', 'databaseURL', 'projectId', 'storageBucket', 'messagingSenderId', 'appId', 'vapidKey'];
 const writeFileAsync = util_1.promisify(fs_1.writeFile);
 const SERVICEWORKER_FILENAME = 'capacitor-pwa-firebase-msg-sw.js';
