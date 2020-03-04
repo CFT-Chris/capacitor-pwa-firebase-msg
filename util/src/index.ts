@@ -112,7 +112,7 @@ async function generateServiceWorker(capacitorConfig: any, firebaseConfig: CliCo
       logFatal(`Unable to find required files in node_modules/firebase. Are you sure the firebase dependency is installed?`);
     }
     else {
-      const webDirAbs = resolve(process.cwd(), capacitorConfig.webDir);
+      const webDirAbs = resolve(process.cwd(), '..', '..', capacitorConfig.webDir);
 
       await writeFileAsync(join(webDirAbs, SERVICEWORKER_FILENAME), serviceWorker);
       await writeFileAsync(join(webDirAbs, FIREBASE_CONFIG_FILENAME), JSON.stringify(firebaseConfig, null, 2));
@@ -130,7 +130,7 @@ generateServiceWorker(config, config.plugins.PWAFirebaseMsg).then(
   () => {
     console.log(
       chalk.green('[success]'), 
-      `${SERVICEWORKER_FILENAME}, ${FIREBASE_CONFIG_FILENAME}, ${FIREBASE_APP_FILENAME} and ${FIREBASE_MESSAGING_FILENAME} saved to ${resolve(process.cwd(), config.webDir)}`
+      `${SERVICEWORKER_FILENAME}, ${FIREBASE_CONFIG_FILENAME}, ${FIREBASE_APP_FILENAME} and ${FIREBASE_MESSAGING_FILENAME} saved to ${resolve(process.cwd(), '..', '..', config.webDir)}`
     );
   },
   (e) => {
