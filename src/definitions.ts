@@ -1,9 +1,7 @@
+import { PushNotificationsPlugin } from "@capacitor/core";
+
 declare module "@capacitor/core" {
   interface PluginRegistry {
-    PWAFirebaseMsg: PWAFirebaseMsgPlugin;
+    PWAFirebaseMsg: PushNotificationsPlugin;
   }
-}
-
-export interface PWAFirebaseMsgPlugin {
-  echo(options: { value: string }): Promise<{value: string}>;
 }
