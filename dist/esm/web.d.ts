@@ -22,4 +22,4 @@ export declare class PWAFirebaseMsgWeb extends WebPlugin implements PushNotifica
     listChannels(): Promise<PushNotificationChannelList>;
 }
 declare const PWAFirebaseMsg: PWAFirebaseMsgWeb;
-export { PWAFirebaseMsg };
+export { PWAFirebaseMsg as PushNotifications };

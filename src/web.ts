@@ -149,7 +149,7 @@ export class PWAFirebaseMsgWeb extends WebPlugin implements PushNotificationsPlu
 
 const PWAFirebaseMsg = new PWAFirebaseMsgWeb();
 
-export { PWAFirebaseMsg };
+export { PWAFirebaseMsg as PushNotifications };
 
 import { registerWebPlugin } from '@capacitor/core';
 registerWebPlugin(PWAFirebaseMsg);
