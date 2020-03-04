@@ -6,7 +6,7 @@ const path_1 = require("path");
 const fs_extra_1 = require("fs-extra");
 const chalk = require("chalk");
 // @ts-ignore
-const capacitor_config_json_1 = require("../../../../../capacitor.config.json");
+const capacitor_config_json_1 = require("../../../../capacitor.config.json");
 const FIREBASECONFIGKEYS = ['apiKey', 'authDomain', 'databaseURL', 'projectId', 'storageBucket', 'messagingSenderId', 'appId', 'vapidKey'];
 const writeFileAsync = util_1.promisify(fs_1.writeFile);
 const SERVICEWORKER_FILENAME = 'capacitor-pwa-firebase-msg-sw.js';
@@ -42,6 +42,7 @@ function logError(...args) {
 }
 function logFatal(...args) {
     logError(...args);
+    logError(`When the errors are fixed, reinstall this package: npm i capacitor-pwa-firebase-msg`);
     return process.exit(1);
 }
 function resolveNode(capacitorConfig, ...pathSegments) {

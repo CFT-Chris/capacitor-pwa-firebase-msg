@@ -5,7 +5,7 @@ import { copy } from 'fs-extra';
 import * as chalk from 'chalk';
 
 // @ts-ignore
-import config from '../../../../../../capacitor.config.json';
+import config from '../../../../capacitor.config.json';
 
 interface CliConfigFirebase {
   apiKey: string;
