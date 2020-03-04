@@ -5,10 +5,10 @@
   "main": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "scripts": {
-    "build": "npm run clean && tsc --p tsconfig.json && tsc --p cli/tsconfig.json",
-    "clean": "rimraf ./dist ./cli/dist",
+    "build": "npm run clean && tsc --p tsconfig.json && tsc --p util/tsconfig.json",
+    "clean": "rimraf ./dist ./util/dist",
     "prepublishOnly": "npm run build",
-    "postinstall": "node cli/dist/index.js"
+    "postinstall": "node util/dist/index.js"
   },
   "author": "CFT-Chris",
   "license": "MIT",
@@ -27,7 +27,7 @@
   },
   "files": [
     "dist/",
-    "cli/dist/"
+    "util/dist/"
   ],
   "keywords": [
     "capacitor",
