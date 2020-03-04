@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
-      "strict": true,
-      "lib": ["es2016"],
-      "outDir": "dist",
-      "module": "commonjs",
-      "target": "es2017",
-      "moduleResolution": "node",
-      "pretty": true,
-      //"noUnusedLocals": true,
-      //"noUnusedParameters": true
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "lib": ["es2016"],
+    "outDir": "dist",
+    "module": "commonjs",
+    "target": "es2017",
+    "moduleResolution": "node",
+    "pretty": true
   },
   "files": [
       "src/index.ts"
