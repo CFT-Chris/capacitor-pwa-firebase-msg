@@ -48,11 +48,11 @@ function logFatal(...args) {
     logError(`When the errors are fixed, reinstall this package: npm i capacitor-pwa-firebase-msg`);
     return process.exit(1);
 }
-function resolveNode(capacitorConfig, ...pathSegments) {
+function resolveNode(...pathSegments) {
     const id = pathSegments[0];
     const path = pathSegments.slice(1);
     let modulePath;
-    const starts = [capacitorConfig.app.rootDir];
+    const starts = [process.cwd()];
     for (let start of starts) {
         modulePath = resolveNodeFrom(start, id);
         if (modulePath) {
@@ -86,8 +86,8 @@ async function generateServiceWorker(capacitorConfig, firebaseConfig) {
     }
     else {
         const serviceWorker = SERVICEWORKER_TEMPLATE.replace('[SENDER_ID]', firebaseConfig.messagingSenderId);
-        const firebasePath = resolveNode(capacitorConfig, 'firebase', FIREBASE_APP_FILENAME);
-        const firebaseMessagingPath = resolveNode(capacitorConfig, 'firebase', FIREBASE_MESSAGING_FILENAME);
+        const firebasePath = resolveNode('firebase', FIREBASE_APP_FILENAME);
+        const firebaseMessagingPath = resolveNode('firebase', FIREBASE_MESSAGING_FILENAME);
         if (!firebasePath || !firebaseMessagingPath) {
             logFatal(`Unable to find required files in node_modules/firebase. Are you sure the firebase dependency is installed?`);
         }
