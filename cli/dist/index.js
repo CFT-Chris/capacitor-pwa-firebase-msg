@@ -98,7 +98,7 @@ async function generateServiceWorker(capacitorConfig, firebaseConfig) {
     }
 }
 if (!capacitor_config_json_1.default || !capacitor_config_json_1.default.plugins || !capacitor_config_json_1.default.plugins.PWAFirebaseMsg) {
-    logFatal('Firebase configuration missing under plugins.PWAFirebaseMsg inside of capacitor.config.json');
+    logFatal('Firebase configuration missing under plugins.PWAFirebaseMsg inside of capacitor.config.json', JSON.stringify(capacitor_config_json_1.default, null, 2));
 }
 generateServiceWorker(capacitor_config_json_1.default, capacitor_config_json_1.default.plugins.PWAFirebaseMsg).then(() => {
     console.log(chalk.green('[success]'), `${SERVICEWORKER_FILENAME}, ${FIREBASE_CONFIG_FILENAME}, ${FIREBASE_APP_FILENAME} and ${FIREBASE_MESSAGING_FILENAME} saved to ${path_1.resolve(process.cwd(), capacitor_config_json_1.default.webDir)}`);

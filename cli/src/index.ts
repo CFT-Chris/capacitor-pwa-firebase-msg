@@ -122,7 +122,7 @@ async function generateServiceWorker(capacitorConfig: any, firebaseConfig: CliCo
 }
 
 if (!config || !config.plugins || !config.plugins.PWAFirebaseMsg) {
-  logFatal('Firebase configuration missing under plugins.PWAFirebaseMsg inside of capacitor.config.json');
+  logFatal('Firebase configuration missing under plugins.PWAFirebaseMsg inside of capacitor.config.json', JSON.stringify(config, null, 2));
 }
 
 generateServiceWorker(config, config.plugins.PWAFirebaseMsg).then(
