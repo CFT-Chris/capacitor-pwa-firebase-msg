@@ -92,7 +92,7 @@ async function generateServiceWorker(capacitorConfig, firebaseConfig) {
             logFatal(`Unable to find required files in node_modules/firebase. Are you sure the firebase dependency is installed?`);
         }
         else {
-            const webDirAbs = path_1.resolve(process.cwd(), capacitorConfig.webDir);
+            const webDirAbs = path_1.resolve(process.cwd(), '..', '..', capacitorConfig.webDir);
             await writeFileAsync(path_1.join(webDirAbs, SERVICEWORKER_FILENAME), serviceWorker);
             await writeFileAsync(path_1.join(webDirAbs, FIREBASE_CONFIG_FILENAME), JSON.stringify(firebaseConfig, null, 2));
             await fs_extra_1.copy(firebasePath, path_1.join(webDirAbs, FIREBASE_APP_FILENAME));
@@ -104,7 +104,7 @@ if (!capacitor_config_json_1.default || !capacitor_config_json_1.default.plugins
     logFatal('Firebase configuration missing under plugins.PWAFirebaseMsg inside of capacitor.config.json', JSON.stringify(capacitor_config_json_1.default, null, 2));
 }
 generateServiceWorker(capacitor_config_json_1.default, capacitor_config_json_1.default.plugins.PWAFirebaseMsg).then(() => {
-    console.log(chalk.green('[success]'), `${SERVICEWORKER_FILENAME}, ${FIREBASE_CONFIG_FILENAME}, ${FIREBASE_APP_FILENAME} and ${FIREBASE_MESSAGING_FILENAME} saved to ${path_1.resolve(process.cwd(), capacitor_config_json_1.default.webDir)}`);
+    console.log(chalk.green('[success]'), `${SERVICEWORKER_FILENAME}, ${FIREBASE_CONFIG_FILENAME}, ${FIREBASE_APP_FILENAME} and ${FIREBASE_MESSAGING_FILENAME} saved to ${path_1.resolve(process.cwd(), '..', '..', capacitor_config_json_1.default.webDir)}`);
 }, (e) => {
     logFatal('Unable to write files to Capacitor web app directory', e);
 });
