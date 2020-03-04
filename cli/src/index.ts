@@ -111,22 +111,25 @@ async function generateServiceWorker(capacitorConfig: any, firebaseConfig: CliCo
       logFatal(`Unable to find required files in node_modules/firebase. Are you sure the firebase dependency is installed?`);
     }
     else {
-      await writeFileAsync(join(capacitorConfig.app.webDirAbs, SERVICEWORKER_FILENAME), serviceWorker);
-      await writeFileAsync(join(capacitorConfig.app.webDirAbs, FIREBASE_CONFIG_FILENAME), JSON.stringify(firebaseConfig, null, 2));
-      await copy(firebasePath, join(capacitorConfig.app.webDirAbs, FIREBASE_APP_FILENAME));
-      await copy(firebaseMessagingPath, join(capacitorConfig.app.webDirAbs, FIREBASE_MESSAGING_FILENAME));
+      const webDirAbs = resolve(process.cwd(), capacitorConfig.webDir);
+
+      await writeFileAsync(join(webDirAbs, SERVICEWORKER_FILENAME), serviceWorker);
+      await writeFileAsync(join(webDirAbs, FIREBASE_CONFIG_FILENAME), JSON.stringify(firebaseConfig, null, 2));
+      await copy(firebasePath, join(webDirAbs, FIREBASE_APP_FILENAME));
+      await copy(firebaseMessagingPath, join(webDirAbs, FIREBASE_MESSAGING_FILENAME));
     }
   }
 }
 
-if (!config || !config.app || !config.app.plugins || !config.app.plugins.PWAFirebaseMsg)
-  logFatal('Firebase configuration missing under app.plugins.PWAFirebaseMsg inside of capacitor.config.json');
+if (!config || !config.plugins || !config.plugins.PWAFirebaseMsg) {
+  logFatal('Firebase configuration missing under plugins.PWAFirebaseMsg inside of capacitor.config.json');
+}
 
-generateServiceWorker(config, config.app.plugins.PWAFirebaseMsg).then(
+generateServiceWorker(config, config.plugins.PWAFirebaseMsg).then(
   () => {
     console.log(
       chalk.green('[success]'), 
-      `${SERVICEWORKER_FILENAME}, ${FIREBASE_CONFIG_FILENAME}, ${FIREBASE_APP_FILENAME} and ${FIREBASE_MESSAGING_FILENAME} saved to ${config.app.webDirAbs}`
+      `${SERVICEWORKER_FILENAME}, ${FIREBASE_CONFIG_FILENAME}, ${FIREBASE_APP_FILENAME} and ${FIREBASE_MESSAGING_FILENAME} saved to ${resolve(process.cwd(), config.webDir)}`
     );
   },
   (e) => {
