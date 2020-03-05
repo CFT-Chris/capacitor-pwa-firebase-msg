@@ -8,7 +8,7 @@
     "build": "npm run clean && tsc --p tsconfig.json && tsc --p util/tsconfig.json",
     "clean": "rimraf ./dist ./util/dist",
     "prepublishOnly": "npm run build",
-    "precapcopy": "node util/dist/index.js"
+    "precapcopyweb": "node util/dist/index.js"
   },
   "author": "CFT-Chris",
   "license": "MIT",
