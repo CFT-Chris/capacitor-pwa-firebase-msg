@@ -13,7 +13,7 @@ import '@firebase/messaging';
 export class PWAFirebaseMsgWeb extends WebPlugin {
     constructor() {
         super({
-            name: 'PWAFirebaseMsg',
+            name: 'PushNotifications',
             platforms: ['web']
         });
     }

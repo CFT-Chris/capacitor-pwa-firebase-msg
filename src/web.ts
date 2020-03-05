@@ -17,7 +17,7 @@ export class PWAFirebaseMsgWeb extends WebPlugin implements PushNotificationsPlu
 
   constructor() {
     super({
-      name: 'PWAFirebaseMsg',
+      name: 'PushNotifications',
       platforms: ['web']
     });
   }
