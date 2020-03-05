@@ -6,13 +6,13 @@ This is a Capacitor Web plugin that enables Push Notifications for Web apps. Rea
 ## Setup Instructions
 Go to **Project Settings** in the Firebase console. In the **General** section, copy the web app's Firebase config from **Firebase SDK snippet** and paste it as `plugins.PWAFirebaseMsg` in capacitor.config.json. Under the **Cloud Messaging** section, generate a new VAPID **Key Pair** under **Web configuration**, and provide the value to `plugins.PWAFirebaseMsg.vapidKey`. See example capacitor.config.json below:
 
-```
+```json
 {
   "appId": "app.capacitor.my",
   "appName": "My Capacitor App",
   "serviceWorker": {
-    "name": "capacitor-sw.js", // Optional
-    "combineWorkers": ["capacitor-pwa-firebase-msg-sw.js", "ngsw-worker.js"], // Optional
+    "name": "capacitor-sw.js",
+    "combineWorkers": ["capacitor-pwa-firebase-msg-sw.js", "ngsw-worker.js"],
   },
   "plugins": {
     "PWAFirebaseMsg": {
@@ -41,7 +41,7 @@ Ensure that your app uses `capacitor-sw.js` as its service worker. The service w
 
 In an Angular PWA, for example, the following code in `app.module.ts` will use `capacitor-sw.js` as a service worker:
 
-```
+```ts
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 /* ... */
@@ -52,15 +52,16 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     /* ... */
 ```
 
-Then in your app code, import the plugin so that it can register itself with Capacitor:
+### Usage
+After setup, in your app code, import the plugin so that it can register itself with Capacitor:
 
-```
+```ts
 import "capacitor-pwa-firebase-msg";
 ```
 
-Now you can use it using the same `PushNotification` Capacitor plugin name.  You may already have code for this if you already handled push notifications for Android or iOS platforms using Capacitor's built-in PushNotification API:
+Now you can use it using the same `PushNotification` Capacitor plugin name.  You may already have code for this if you already handled push notifications for Android or iOS platforms using Capacitor's built-in [PushNotification API](https://capacitor.ionicframework.com/docs/apis/push-notifications):
 
-```
+```ts
 import { Plugins } from '@capacitor/core';
 
 const { PushNotifications } = Plugins;
