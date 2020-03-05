@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "lib": ["es2016"],
+    "outDir": "dist",
+    "module": "commonjs",
+    "target": "es2017",
+    "moduleResolution": "node",
+    "pretty": true
+  },
+  "files": [
+      "src/index.ts"
+  ]
+}

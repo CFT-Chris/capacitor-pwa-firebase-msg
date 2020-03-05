@@ -1,0 +1,45 @@
+{
+  "name": "capacitor-pwa-firebase-msg",
+  "version": "0.0.1",
+  "description": "Enable push notifications for Capacitor progressive web apps (PWA) using Firebase as a cloud messaging service",
+  "main": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && tsc --p tsconfig.json && tsc --p util/tsconfig.json",
+    "clean": "rimraf ./dist ./util/dist",
+    "prepublishOnly": "npm run build",
+    "precapcopyweb": "node util/dist/index.js"
+  },
+  "author": "CFT-Chris",
+  "license": "MIT",
+  "dependencies": {
+    "@capacitor/core": "latest",
+    "chalk": "^3.0.0",
+    "firebase": "^6.4.0",
+    "fs-extra": "^8.1.0",
+    "semver": "^7.1.3"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^8.1.0",
+    "@types/semver": "^7.1.0",
+    "rimraf": "^3.0.0",
+    "typescript": "^3.2.4"
+  },
+  "files": [
+    "dist/",
+    "util/dist/"
+  ],
+  "keywords": [
+    "capacitor",
+    "plugin",
+    "native"
+  ],
+  "capacitor": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CFT-Chris/capacitor-pwa-firebase-msg"
+  },
+  "bugs": {
+    "url": "https://github.com/CFT-Chris/capacitor-pwa-firebase-msg/issues"
+  }
+}
