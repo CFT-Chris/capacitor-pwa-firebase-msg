@@ -3,6 +3,9 @@ Enable push notifications for Capacitor progressive web apps (PWA) using Firebas
 
 This is a Capacitor Web plugin that enables Push Notifications for Web apps. Read the [guide to set up Push Notifications with Firebase](https://capacitor.ionicframework.com/docs/guides/push-notifications-firebase/) first, then proceed with the setup instructions. 
 
+## Requirements
+**Capacitor Minimum Version:** currently waiting on [pull request in Capacitor project](https://github.com/ionic-team/capacitor/pull/1892).  If you can't wait, the parts of setup instructions below that ask for `npx cap copy web`, you can manually run the npm script for this plugin by doing `npm explore capacitor-pwa-firebase-msg -- npm run precapcopyweb` in the command line in the root directory of your Capacitor project. Then you will have to integrate the generated service-worker capacitor-pwa-firebase-msg-sw.js that is written to the www folder on your own.
+
 ## Setup Instructions
 Go to **Project Settings** in the Firebase console. In the **General** section, copy the web app's Firebase config from **Firebase SDK snippet** and paste it as `plugins.PWAFirebaseMsg` in capacitor.config.json. Under the **Cloud Messaging** section, generate a new VAPID **Key Pair** under **Web configuration**, and provide the value to `plugins.PWAFirebaseMsg.vapidKey`. See example capacitor.config.json below:
 
@@ -74,3 +77,6 @@ PushNotifications.addListener('pushNotificationReceived', /* ... */);
 
 PushNotifications.addListener('pushNotificationActionPerformed', , /* ... */);
 ```
+
+### A note on Firebase notification payloads for PWAs
+This plugin is currently using v6.4 of the Firebase libraries (check [package.json](https://github.com/CFT-Chris/capacitor-pwa-firebase-msg/blob/master/package.json) if this has changed without the README being changed).  For Firebase messages received in background, it is necessary to populate the `notification` in the payload with `click_action`, where `click_action` is the absolute URL to the PWA page expected to be open when `pushNotificationActionPerformed` is handled. Even though the [Firebase spec](https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages) implies that we could override `click_action` via `webpush` in the payload instead, in my experience I could never get background push notifications to work properly (i.e. restoring the PWA from background on click or spawning a new instance if not running) using `webpush`. This means that on the back-end, the push payloads need to know whether it is pushing to PWA or Android or iOS so that the `click_action` is tailored to the correct platform.  
