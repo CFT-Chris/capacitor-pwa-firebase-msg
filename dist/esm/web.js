@@ -16,6 +16,7 @@ export class PWAFirebaseMsgWeb extends WebPlugin {
             name: 'PushNotifications',
             platforms: ['web']
         });
+        this.permissionGranted = false;
     }
     echo(options) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -61,7 +62,7 @@ export class PWAFirebaseMsgWeb extends WebPlugin {
                 const registration = yield navigator.serviceWorker.ready;
                 this.firebaseMessaging = firebase.messaging();
                 this.firebaseMessaging.useServiceWorker(registration);
-                yield Notification.requestPermission();
+                yield this.requestPermission();
                 this.firebaseMessaging.usePublicVapidKey(config.vapidKey);
                 this.firebaseMessaging.onMessage((payload) => {
                     const pushNotification = {
@@ -121,6 +122,24 @@ export class PWAFirebaseMsgWeb extends WebPlugin {
     }
     listChannels() {
         return Promise.reject('Method not implemented.');
+    }
+    requestPermission() {
+        return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
+            if (this.permissionGranted)
+                resolve({ granted: true });
+            else {
+                try {
+                    yield Notification.requestPermission();
+                    this.permissionGranted = true;
+                }
+                catch (ex) {
+                    this.permissionGranted = false;
+                }
+                finally {
+                    resolve({ granted: this.permissionGranted });
+                }
+            }
+        }));
     }
 }
 const PWAFirebaseMsg = new PWAFirebaseMsgWeb();

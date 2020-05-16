@@ -5,15 +5,17 @@ import '@firebase/messaging';
 import {
   PushNotificationsPlugin, 
   PushNotificationDeliveredList,
-  PushNotificationChannelList,
+  NotificationChannelList,
   PushNotificationToken,
   PushNotification,
-  PushNotificationActionPerformed
+  PushNotificationActionPerformed,
+  NotificationPermissionResponse
 } from '@capacitor/core/dist/esm/core-plugin-definitions';
 
 export class PWAFirebaseMsgWeb extends WebPlugin implements PushNotificationsPlugin {
   private promiseFirebase: Promise<void>;
   private firebaseMessaging: any;
+  private permissionGranted: boolean = false;
 
   constructor() {
     super({
@@ -71,7 +73,7 @@ export class PWAFirebaseMsgWeb extends WebPlugin implements PushNotificationsPlu
       this.firebaseMessaging = firebase.messaging();
       this.firebaseMessaging.useServiceWorker(registration);
 
-      await Notification.requestPermission();
+      await this.requestPermission();
       
       this.firebaseMessaging.usePublicVapidKey(config.vapidKey);
 
@@ -140,8 +142,27 @@ export class PWAFirebaseMsgWeb extends WebPlugin implements PushNotificationsPlu
     return Promise.reject('Method not implemented.');
   }
 
-  listChannels(): Promise<PushNotificationChannelList> {
+  listChannels(): Promise<NotificationChannelList> {
     return Promise.reject('Method not implemented.');
+  }
+
+  requestPermission(): Promise<NotificationPermissionResponse> {
+    return new Promise(async (resolve) => {
+      if (this.permissionGranted)
+        resolve({ granted: true });
+      else {
+        try {
+          await Notification.requestPermission();
+          this.permissionGranted = true;
+        }
+        catch (ex) {
+          this.permissionGranted = false;
+        }
+        finally {
+          resolve({ granted: this.permissionGranted });
+        }
+      }
+    });
   }
 
 }

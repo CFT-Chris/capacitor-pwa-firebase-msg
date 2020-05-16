@@ -13,7 +13,7 @@
   "author": "CFT-Chris",
   "license": "MIT",
   "dependencies": {
-    "@capacitor/core": "latest",
+    "@capacitor/core": "^2.1.0",
     "chalk": "^3.0.0",
     "firebase": "^6.4.0",
     "fs-extra": "^8.1.0",

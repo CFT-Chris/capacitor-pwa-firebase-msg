@@ -1,9 +1,10 @@
 import { WebPlugin } from '@capacitor/core';
 import '@firebase/messaging';
-import { PushNotificationsPlugin, PushNotificationDeliveredList, PushNotificationChannelList } from '@capacitor/core/dist/esm/core-plugin-definitions';
+import { PushNotificationsPlugin, PushNotificationDeliveredList, NotificationChannelList, NotificationPermissionResponse } from '@capacitor/core/dist/esm/core-plugin-definitions';
 export declare class PWAFirebaseMsgWeb extends WebPlugin implements PushNotificationsPlugin {
     private promiseFirebase;
     private firebaseMessaging;
+    private permissionGranted;
     constructor();
     echo(options: {
         value: string;
@@ -19,7 +20,8 @@ export declare class PWAFirebaseMsgWeb extends WebPlugin implements PushNotifica
     removeAllDeliveredNotifications(): Promise<void>;
     createChannel(): Promise<void>;
     deleteChannel(): Promise<void>;
-    listChannels(): Promise<PushNotificationChannelList>;
+    listChannels(): Promise<NotificationChannelList>;
+    requestPermission(): Promise<NotificationPermissionResponse>;
 }
 declare const PWAFirebaseMsg: PWAFirebaseMsgWeb;
 export { PWAFirebaseMsg as PushNotifications };
