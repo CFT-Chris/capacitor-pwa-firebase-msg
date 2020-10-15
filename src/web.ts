@@ -118,7 +118,7 @@ export class PWAFirebaseMsgWeb extends WebPlugin implements PushNotificationsPlu
       await this.getFirebaseToken();
     }
     catch (ex) {
-      console.error('Unable to get Firebase token', ex);
+      this.notifyListeners('registrationError', ex);
     }
   }
 
